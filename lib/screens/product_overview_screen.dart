@@ -9,6 +9,9 @@ class ProductOverviewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product '),
+        actions: [
+          PopupMenuButton(itemBuilder: itemBuilder)
+        ],
 
       ),
       body: ProductGrids(),
