@@ -13,15 +13,23 @@ class CardItems{
 }
 
 class Cart with ChangeNotifier {
-        late Map<String, CardItems> _items;
+        late Map<String, CardItems> _items = {};
 
         Map<String, CardItems> get items{
           return {..._items};
 }
 
   int get itemCount{
-          return _items == null ? 0 : _items.length;
+          return  _items.length;
   }
+
+    double get totalAmount {
+          var total = 0.0;
+          _items.forEach((key, value) {
+            total += value.price * value.quantity;
+          });
+          return total;
+    }
 
 void addItem(String productId, double price, String title){
           if(_items.containsKey(productId)){
@@ -37,7 +45,17 @@ void addItem(String productId, double price, String title){
                     quantity: 1,
                     price: price));
           }
-
+      notifyListeners();
 }
+
+void removeItem (String productId){
+          _items.remove(productId);
+          notifyListeners();
+}
+
+  void clear(){
+          _items = {};
+          notifyListeners();
+  }
 
 }
