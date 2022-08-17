@@ -14,7 +14,9 @@ class UserProduct extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Your Product'),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.add))
+          IconButton(onPressed: (){
+            Navigator.of(context).pushNamed('/editproduct');
+          }, icon: const Icon(Icons.add))
         ],
       ),
       drawer: AppDrawer(),
@@ -22,6 +24,7 @@ class UserProduct extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: ListView.builder(itemBuilder: (_, index) => Column(children: [
           UserProductItem(
+            productData.items[index].id,
             productData.items[index].title,
             productData.items[index].imageUrl,),
           Divider()
